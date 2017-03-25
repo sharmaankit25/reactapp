@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Helpers from './Helpers';
-import {dataList} from './dataList';
+
+import dataList from './DataList';
 
 
 class StorePicker extends Component {
@@ -14,7 +14,6 @@ class StorePicker extends Component {
     console.log(timeStamp);
     var storeId = this.refs.storeId.value;
     this.state.data['fish-'+timeStamp] = storeId;
-    // this.setState(this.state);
     this.setState({name:storeId,data:this.state.data});
   }
 
@@ -22,9 +21,9 @@ class StorePicker extends Component {
     console.log(this.state.data);
   }
   renderData(key){
-    // return <dataList key={key} index={key} details={this.state.data[key]}/>;
-    return <li key={key}>{this.state.data[key]}</li>;
+    return <List key={key} index={key} details={this.state.data[key]} />
   }
+
   render(){
     return(
       <div>
@@ -35,7 +34,7 @@ class StorePicker extends Component {
       </form>
       <button onClick={this.loadData.bind(this)}>Load Data</button>
       <ul>
-        <li>{Object.keys(this.state.data).map(this.renderData.bind(this))}</li>
+        {Object.keys(this.state.data).map(this.renderData.bind(this))}
       </ul>
       </div>
     );
@@ -43,5 +42,11 @@ class StorePicker extends Component {
 
 }
 
+const List = (props) => {
+  // define text and styles here
+  return (
+    <li key={props.index}>{props.details.value}</li>
+  );
+}
 
 export default StorePicker;
