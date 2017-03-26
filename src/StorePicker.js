@@ -13,6 +13,8 @@ class StorePicker extends Component {
                 }
     // we need to bind the function to the constructor to get the state of the main Component
     this.removeItem = this.removeItem.bind(this);
+    this.editTask = this.editTask.bind(this);
+
   }
   goToStore(e){
     e.preventDefault();
@@ -28,14 +30,23 @@ class StorePicker extends Component {
     }
   }
 
+
   loadData(){
     console.log(this.state.data);
   }
 
   renderData(key){
       // return <dataList key={key} index={key} details={this.state.data[key]} />
-    return <List key={key} index={key} details={this.state.data[key]} removeItem={this.removeItem} />
+    return <List key={key} index={key} details={this.state.data[key]} removeItem={this.removeItem} editTask={this.editTask} />
   }
+  editTask(index,newValue){
+    const {data} = this.state;
+    data[index] = newValue;
+    this.setState({
+      data
+    })
+  }
+
   removeItem(key){
     // this.state.data[a] = null;
 
@@ -89,18 +100,25 @@ class List extends Component {
     this.editItem = this.editItem.bind(this);
     this.showItem = this.showItem.bind(this);
     this.toggleState = this.toggleState.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+
   }
   toggleState(e){
-    e.stopPropogation();
+    e.stopPropagation();
     const {isEditing} = this.state;
     this.setState({
       isEditing:!isEditing
     })
   }
+  updateItem(e){
+    e.preventDefault();
+    this.props.editTask(this.props.index,this.input.value);
+    this.toggleState(e);
+  }
   editItem(){
     return  (
-      <form>
-        <input type="text" defaultValue={this.props.details} />
+      <form onSubmit={this.updateItem}>
+        <input type="text" ref={(value)=>{this.input = value}} defaultValue={this.props.details} />
         <button type="submit ">Update</button>
       </form>
     );
