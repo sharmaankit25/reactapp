@@ -58,6 +58,7 @@ const BasicExample = () => (
         <li><Link to="/">Home</Link></li>
         <li><Link to="/storepicker">Store Picker</Link></li>
         <li><Link to="/topics">Topics</Link></li>
+        <li><Link to="/about">Topics</Link></li>
       </ul>
 
       <hr/>
@@ -65,6 +66,7 @@ const BasicExample = () => (
       <Route exact path="/" component={App}/>
       <Route path="/storepicker" component={StorePicker}/>
       <Route path="/topics" component={Topics}/>
+      <Route path="/about" component={About}/>
     </div>
   </Router>
 )
