@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-
-class dataList extends Component{
-  render(){
-    return(
-        <li>{this.props.key}</li>
-    );
-  }
+const dataList = (props) => {
+  // define text and styles here
+  return (
+    <li key={props.index}>{props.details.value}</li>
+  );
 }
 export default dataList;
