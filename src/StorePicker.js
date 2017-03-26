@@ -80,18 +80,46 @@ class StorePicker extends Component {
 // }
 
 class List extends Component {
-  activateItem(){
-    console.log('Activate item');
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isEditing : false,
+    }
+    this.editItem = this.editItem.bind(this);
+    this.showItem = this.showItem.bind(this);
+    this.toggleState = this.toggleState.bind(this);
+  }
+  toggleState(e){
+    e.stopPropogation();
+    const {isEditing} = this.state;
+    this.setState({
+      isEditing:!isEditing
+    })
+  }
+  editItem(){
+    return  (
+      <form>
+        <input type="text" defaultValue={this.props.details} />
+        <button type="submit ">Update</button>
+      </form>
+    );
+  }
+  showItem(){
+    return (
+      <li key={this.props.index}>{this.props.details}
+        <button ref="remove" onClick={this.props.removeItem.bind(this,this.props.index)} >Remove</button>
+        <button ref="edit" onClick={this.toggleState}>Edit</button>
+      </li>
+    );
   }
   render(){
-    var buttonText= "Active";
+    // const isEditing = this.state.isEditing;
+    const { isEditing } = this.state;
     return(
-      <div>
-        <li key={this.props.index}>{this.props.details}
-          <button ref="remove" onClick={this.props.removeItem.bind(this,this.props.index)} >Remove</button>
-          <button ref="active" onClick={this.activateItem.bind(this)}>{buttonText}</button>
-        </li>
-      </div>
+      <section>
+        { isEditing ?  this.editItem() :  this.showItem() }
+      </section>
     );
   }
 
