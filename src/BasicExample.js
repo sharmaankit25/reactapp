@@ -58,7 +58,7 @@ const BasicExample = () => (
         <li><Link to="/">Home</Link></li>
         <li><Link to="/storepicker">Store Picker</Link></li>
         <li><Link to="/topics">Topics</Link></li>
-        <li><Link to="/about">Topics</Link></li>
+        <li><Link to="/about">About</Link></li>
       </ul>
 
       <hr/>

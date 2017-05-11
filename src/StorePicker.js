@@ -30,15 +30,18 @@ class StorePicker extends Component {
     }
   }
 
-
+  //Checking the value in the state object
   loadData(){
     console.log(this.state.data);
   }
 
+  //Creates the list component to render the list items
   renderData(key){
       // return <dataList key={key} index={key} details={this.state.data[key]} />
     return <List key={key} index={key} details={this.state.data[key]} removeItem={this.removeItem} editTask={this.editTask} />
   }
+
+  //Edits and update the object value
   editTask(index,newValue){
     const {data} = this.state;
     data[index] = newValue;
@@ -47,6 +50,7 @@ class StorePicker extends Component {
     })
   }
 
+  //Delete or remove the object key from the state
   removeItem(key){
     // this.state.data[a] = null;
 
